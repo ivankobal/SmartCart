@@ -1,0 +1,52 @@
+.footer {
+  background-color: #1a1c23; /* Темний фон під колір шапки */
+  border-top: 1px solid #2d3139;
+  padding: 40px 48px;
+  color: #9ca3af;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  width: 100%;
+}
+
+.footerContent {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 40px;
+}
+
+.footerCol h5 {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.footerCol p {
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 400px;
+}
+
+.footerCol ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footerCol a {
+  color: #9ca3af;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.2s;
+}
+
+.footerCol a:hover {
+  color: #ffffff;
+}

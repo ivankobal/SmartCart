@@ -1,16 +1,25 @@
-# React + Vite
+SmartCart
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SmartCart is a web application designed for electronics price monitoring, product catalog browsing, and specification comparison. The frontend is planned to be built using React.
 
-Currently, two official plugins are available:
+Project Structure & Assets
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+All project visuals are located in the `docs/` directory:
 
-## React Compiler
+Wireframes (Lo-Fi Mockups)
+Located in `docs/mockups/`:
+* `Catalog Mockup.png` — Main product catalog layout
+* `Compare Builder Mockup.png` — Side-by-side product comparison tool
+* `Product Details Mockup.png` — Detailed product view and specifications
+* `Sign in Mockup.png` — User login interface
+* `Sign up Mockup.png` — User registration interface
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Final UI Design (Hi-Fi)
+Located in `docs/design/`:
+* `Catalog.png` — Final catalog interface in dark mode
+* `Compare Builder.png` — Final product comparison table
+* `Product Details.png` — Final product specifications and store offers
+* `Sign in.png` — Final authentication screen
+* `Sign up.png` — Final account creation screen
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.

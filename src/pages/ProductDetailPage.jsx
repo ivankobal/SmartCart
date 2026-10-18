@@ -1,7 +1,6 @@
-import styles from './ProductDetailPage.module.css'; // Твої стилі, які я давав раніше
+import styles from './ProductDetailPage.module.css';
 
 export default function ProductDetailPage({ product, goBack }) {
-  // Фейкові продавці (їх теж можна зробити динамічними в майбутньому)
   const sellers = [
     {
       name: 'SoundWorld Marketplace',
@@ -37,7 +36,6 @@ export default function ProductDetailPage({ product, goBack }) {
       <div className={styles.layout}>
         <div className={styles.gallery}>
           <div className={styles.mainImage}>
-            {/* Підставляємо картинку з вибраного товару */}
             <img src={product.img} alt={product.title} />
           </div>
           <div className={styles.thumbnails}>
@@ -48,7 +46,6 @@ export default function ProductDetailPage({ product, goBack }) {
         </div>
 
         <div>
-          {/* Підставляємо назву та специфікації */}
           <h1 className={styles.title}>{product.title}</h1>
           <div className={styles.meta}>{product.specs}</div>
           <div className={styles.badge}>Best choice for this price!</div>

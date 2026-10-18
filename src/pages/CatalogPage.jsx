@@ -111,8 +111,6 @@ export default function CatalogPage({ onSelectProduct }) {
                 <input type="checkbox" /> Compare
               </label>
               <div className={styles.buttonGroup}>
-                {/* Було: onClick={onSelectProduct} */}
-                {/* Стало: */}
                 <button
                   className={`${styles.btn} ${styles.btnSecondary}`}
                   onClick={() => onSelectProduct(p)}

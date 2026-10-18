@@ -3,7 +3,6 @@ import styles from './ComparePage.module.css';
 export default function ComparePage() {
   return (
     <main className={styles.main}>
-      {/* Верхня панель */}
       <div className={styles.topBar}>
         <div className={styles.controls}>
           <button className={`${styles.btn} ${styles.btnWhite}`}>
@@ -25,9 +24,7 @@ export default function ComparePage() {
       </div>
 
       <div className={styles.grid}>
-        {/* КОЛОНКА 1: Заголовки характеристик */}
         <div>
-          {/* Пусте місце для вирівнювання з шапками товарів */}
           <div style={{ height: '84px', marginBottom: '24px' }}></div>
 
           <div className={styles.attrList}>
@@ -41,12 +38,11 @@ export default function ComparePage() {
           </div>
         </div>
 
-        {/* КОЛОНКА 2: Товар 1 */}
         <div>
           <div className={styles.productHeader}>
             <button className={styles.closeBtn}>✕</button>
             <img
-              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&q=80"
+              src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=150&q=80"
               alt="OrionX"
             />
             <div className={styles.productHeaderInfo}>
@@ -77,12 +73,11 @@ export default function ComparePage() {
           </div>
         </div>
 
-        {/* КОЛОНКА 3: Товар 2 */}
         <div>
           <div className={styles.productHeader}>
             <button className={styles.closeBtn}>✕</button>
             <img
-              src="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&q=80"
+              src="https://images.unsplash.com/photo-1624462966581-bc6d768cbce5?w=150&q=80"
               alt="NovaCharge"
             />
             <div className={styles.productHeaderInfo}>
@@ -115,11 +110,13 @@ export default function ComparePage() {
           </div>
         </div>
 
-        {/* КОЛОНКА 4: Товар 3 */}
         <div>
           <div className={styles.productHeader}>
             <button className={styles.closeBtn}>✕</button>
-            <div className={styles.imagePlaceholder}>Image</div>
+            <img
+              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&q=80"
+              alt="Auralux"
+            />
             <div className={styles.productHeaderInfo}>
               <h3>Auralux NC-7000 Wireless</h3>
               <p>

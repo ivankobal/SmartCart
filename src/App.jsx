@@ -3,14 +3,13 @@ import Header from './modules/components/Header';
 import Footer from './modules/components/Footer';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
-import ComparePage from './pages/ComparePage'; // Импорт страницы сравнения
+import ComparePage from './pages/ComparePage';
 import AuthPage from './pages/AuthPage'; // Импорт страницы авторизации
 
 export default function App() {
   const [activePage, setActivePage] = useState('catalog');
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  // Функция для перехода на детали конкретного товара
   const handleProductSelect = (product) => {
     setSelectedProduct(product);
     setActivePage('detail');
@@ -28,7 +27,6 @@ export default function App() {
     >
       <Header activePage={activePage} setActivePage={setActivePage} />
 
-      {/* Логика переключения страниц */}
       {activePage === 'catalog' && (
         <CatalogPage onSelectProduct={handleProductSelect} />
       )}

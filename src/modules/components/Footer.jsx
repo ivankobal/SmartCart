@@ -1,16 +1,17 @@
 import styles from './Footer.module.css';
 
-export default function Footer() {
+export default function Footer({
+  title = 'Electronics Catalog',
+  description = 'Comprehensive price monitoring and cross-shop product aggregator database.',
+}) {
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
         <div className={styles.footerCol}>
-          <h5>Electronics Catalog</h5>
-          <p>
-            Comprehensive price monitoring and cross-shop product aggregator
-            database.
-          </p>
+          <h5>{title}</h5>
+          <p>{description}</p>
         </div>
+
         <div className={styles.footerCol}>
           <h5>Categories</h5>
           <ul>
@@ -25,6 +26,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
+
         <div className={styles.footerCol}>
           <h5>Support &amp; Legal</h5>
           <ul>

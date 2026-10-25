@@ -2,7 +2,7 @@
   background-color: #1a1c23;
   border-bottom: 1px solid #2d3139;
   padding: 12px 32px;
-  display: flex; /* Змінили на flex */
+  display: flex;
   align-items: center;
   width: 100%;
   font-family:
@@ -35,6 +35,12 @@
   align-items: center;
   justify-content: center;
   font-size: 14px;
+  text-decoration: none;
+}
+
+.brand {
+  color: white;
+  text-decoration: none;
 }
 
 .nav {
@@ -43,7 +49,7 @@
   gap: 18px;
 }
 
-.navLink {
+.link {
   color: #9ca3af;
   background: none;
   border: none;
@@ -52,15 +58,15 @@
   font-weight: 500;
   padding: 0;
   transition: color 0.2s;
+  text-decoration: none;
 }
 
-.navLink:hover,
-.activeLink {
-  color: #ffffff;
+.active {
+  color: white;
 }
 
 .searchContainer {
-  margin-left: 32px; /* Відступ відразу після навігації */
+  margin-left: 32px;
   width: 100%;
   max-width: 360px;
 }
@@ -84,7 +90,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: auto; /* Притискає кнопку Account у самий правий край */
+  margin-left: auto;
 }
 
 .accountBtn {
@@ -99,6 +105,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
 }
 
 .accountBtn:hover {

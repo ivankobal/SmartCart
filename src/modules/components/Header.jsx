@@ -1,40 +1,50 @@
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Header.module.css';
 
-export default function Header({ activePage, setActivePage }) {
+export default function Header() {
   const [showFilters, setShowFilters] = useState(false);
 
   return (
     <header className={styles.header}>
       <div className={styles.leftSection}>
-        <div className={styles.logo} onClick={() => setActivePage('catalog')}>
-          <div className={styles.logoIcon}>🛒</div>
-          SmartCart
+        <div className={styles.logo}>
+          <NavLink to={'/home'} className={styles.logoIcon}>
+            🛒
+          </NavLink>
+          <NavLink className={styles.brand} to={'/home'}>
+            SmartCart
+          </NavLink>
         </div>
         <nav className={styles.nav}>
-          <button
-            className={`${styles.navLink} ${activePage === 'catalog' ? styles.activeLink : ''}`}
-            onClick={() => {
-              setActivePage('catalog');
-              setShowFilters(false);
-            }}
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+            to="/home"
+          >
+            Home
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+            to="/catalog"
           >
             Catalog
-          </button>
-          <button
-            className={`${styles.navLink} ${activePage === 'compare' ? styles.activeLink : ''}`}
-            onClick={() => {
-              setActivePage('compare');
-              setShowFilters(false);
-            }}
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              isActive ? `${styles.link} ${styles.active}` : styles.link
+            }
+            to="/compare"
           >
-            Comparison Builder
-          </button>
+            Comparison builder
+          </NavLink>
 
-          {/* Кнопка Filters з випадаючим віконцем */}
           <div className={styles.navItem}>
             <button
-              className={`${styles.navLink} ${showFilters ? styles.activeLink : ''}`}
+              className={`${styles.link} ${showFilters ? styles.active : ''}`}
               onClick={() => setShowFilters(!showFilters)}
             >
               Filters {showFilters ? '▴' : '▾'}
@@ -75,18 +85,12 @@ export default function Header({ activePage, setActivePage }) {
       </div>
 
       <div className={styles.rightSection}>
-        <button
-          className={styles.accountBtn}
-          onClick={() => setActivePage('auth')}
-        >
+        <NavLink className={styles.accountBtn} to="/auth">
           👤 Account
-        </button>
-        <div
-          className={styles.profileIcon}
-          onClick={() => setActivePage('auth')}
-          title="Profile"
-        >
-          👤
+        </NavLink>
+
+        <div className={styles.profileIcon}>
+          <NavLink to={'/profile'}>👤</NavLink>
         </div>
       </div>
     </header>

@@ -1,0 +1,97 @@
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  color: #ffffff;
+}
+
+.hero {
+  background-color: #21242b;
+  border: 1px solid #2d3139;
+  border-radius: 12px;
+  padding: 48px 24px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: #9ca3af;
+  max-width: 600px;
+  margin: 0 auto 24px auto;
+}
+
+.searchBar {
+  display: flex;
+  gap: 12px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.input {
+  flex: 1;
+  background-color: #16181c;
+  border: 1px solid #2d3139;
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: white;
+  outline: none;
+}
+
+.btnPrimary {
+  background-color: #10b981;
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sectionTitle {
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.categoriesDeck {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background-color: #21242b;
+  border: 1px solid #2d3139;
+  border-radius: 12px;
+  padding: 20px 16px;
+  text-decoration: none;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: #10b981;
+  background-color: #262a33;
+  transform: translateY(-3px);
+}
+
+.card h3 {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+}
+
+.card p {
+  margin: 0;
+  color: #9ca3af;
+  font-size: 0.85rem;
+}

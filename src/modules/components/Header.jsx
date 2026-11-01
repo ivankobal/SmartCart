@@ -1,9 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 import styles from './Header.module.css';
 
 export default function Header() {
   const [showFilters, setShowFilters] = useState(false);
+
+  useLocation();
+  const isAuthenticated = !!localStorage.getItem('smartcart_token');
 
   return (
     <header className={styles.header}>
@@ -85,13 +88,15 @@ export default function Header() {
       </div>
 
       <div className={styles.rightSection}>
-        <NavLink className={styles.accountBtn} to="/auth">
-          👤 Account
-        </NavLink>
-
-        <div className={styles.profileIcon}>
-          <NavLink to={'/profile'}>👤</NavLink>
-        </div>
+        {isAuthenticated ? (
+          <div className={styles.profileIcon}>
+            <NavLink to={'/profile'}>👤</NavLink>
+          </div>
+        ) : (
+          <NavLink className={styles.accountBtn} to="/auth">
+            👤 Account
+          </NavLink>
+        )}
       </div>
     </header>
   );

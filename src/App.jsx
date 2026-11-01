@@ -1,6 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 import styles from './App.module.css';
-import { useState } from 'react';
 import Header from './modules/components/Header';
 import Footer from './modules/components/Footer';
 import CatalogPage from './pages/CatalogPage';
@@ -11,33 +10,12 @@ import RegisterPage from './pages/RegisterPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
 
-const FOOTER_CONFIG = {
-  catalog: {
-    title: 'Catalog of products',
-    description: 'Comparing prices worldwide',
-  },
-  detail: {
-    title: 'Product details',
-    description: 'Full description of product and price currency',
-  },
-  compare: {
-    title: 'Comparison builder',
-    description: 'Compare products and choose the best proposition',
-  },
-  auth: {
-    title: 'Authorisation',
-    description: 'Enter in account to save your products in cart',
-  },
-};
-
 export default function App() {
-  const [activePage, setActivePage] = useState('catalog');
-  const currentFooter = FOOTER_CONFIG[activePage] || FOOTER_CONFIG.catalog;
-
   return (
     <div className={styles.appContainer}>
-      <Header activePage={activePage} setActivePage={setActivePage} />
-      <main style={{ flex: 1 }}>
+      <Header />
+
+      <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
@@ -51,10 +29,7 @@ export default function App() {
         </Routes>
       </main>
 
-      <Footer
-        title={currentFooter.title}
-        description={currentFooter.description}
-      />
+      <Footer />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import Footer from './modules/components/Footer';
 import CatalogPage from './pages/CatalogPage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ComparePage from './pages/ComparePage';
-import AuthPage from './pages/AuthPage'; // Импорт страницы авторизации
+import AuthPage from './pages/AuthPage'; 
 
 export default function App() {
   const [activePage, setActivePage] = useState('catalog');

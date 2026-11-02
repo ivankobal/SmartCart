@@ -46,7 +46,7 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 5px;
 }
 
 .inputWrapper {
@@ -75,6 +75,17 @@
 
 .inputField::placeholder {
   color: #6b7280;
+}
+
+.nav {
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  color: gray;
+}
+
+.nav:hover {
+  color: white;
 }
 
 .btn {

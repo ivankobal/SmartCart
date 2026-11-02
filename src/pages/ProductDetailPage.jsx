@@ -1,6 +1,22 @@
+import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
+import products from '../data/products.js';
+export default function ProductDetailPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-export default function ProductDetailPage({ product, goBack }) {
+  const product = products[Number(id) - 1];
+  if (!product) {
+    return (
+      <main className={styles.main}>
+        <h2>Товар #{id} завантажується або не знайдений...</h2>
+        <button onClick={() => navigate('/catalog')} className={styles.btn}>
+          ← Повернутися до каталогу
+        </button>
+      </main>
+    );
+  }
+
   const sellers = [
     {
       name: 'SoundWorld Marketplace',
@@ -21,11 +37,17 @@ export default function ProductDetailPage({ product, goBack }) {
   return (
     <main className={styles.main}>
       <div className={styles.breadcrumbs}>
-        <span onClick={goBack} style={{ cursor: 'pointer', color: '#10b981' }}>
+        <span
+          onClick={() => navigate('/catalog')}
+          style={{ cursor: 'pointer', color: '#10b981' }}
+        >
           Home
         </span>{' '}
         &gt;
-        <span onClick={goBack} style={{ cursor: 'pointer', color: '#10b981' }}>
+        <span
+          onClick={() => navigate('/catalog')}
+          style={{ cursor: 'pointer', color: '#10b981' }}
+        >
           {' '}
           Electronics
         </span>{' '}

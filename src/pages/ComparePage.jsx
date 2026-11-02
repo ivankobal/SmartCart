@@ -1,6 +1,53 @@
+import { useState } from 'react';
 import styles from './ComparePage.module.css';
 
+const initialProducts = [
+  {
+    id: 1,
+    title: 'OrionX Pro Headphones',
+    brand: 'Stellaris Audio',
+    price: '$199.99',
+    isBestPrice: false,
+    specs: 'Almost good like Auralux...',
+    shipping: 'Free 2-3 day shipping',
+    rating: '4.5',
+    img: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 2,
+    title: 'NovaCharge 65W Charger',
+    brand: 'VoltEdge',
+    price: '$49.50',
+    isBestPrice: true,
+    specs: 'Good, but not really like Auralux...',
+    shipping: 'Standard shipping: 3-5 days',
+    rating: '4.8',
+    img: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=80',
+  },
+  {
+    id: 3,
+    title: 'Auralux NC-7000 Wireless',
+    brand: 'AstraTech',
+    price: '$189.00',
+    isBestPrice: false,
+    specs: 'As good as always!',
+    shipping: 'Expedited shipping available',
+    rating: '4.3',
+    img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=80',
+  },
+];
+
 export default function ComparePage() {
+  const [products, setProducts] = useState(initialProducts);
+
+  const handleRemove = (id) => {
+    setProducts(products.filter((p) => p.id !== id));
+  };
+
+  const handleClear = () => {
+    setProducts([]);
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.topBar}>
@@ -11,7 +58,12 @@ export default function ComparePage() {
           <button className={`${styles.btn} ${styles.btnGreen}`}>
             🔗 Share
           </button>
-          <button className={`${styles.btn} ${styles.btnDark}`}>🗑 Clear</button>
+          <button
+            className={`${styles.btn} ${styles.btnDark}`}
+            onClick={handleClear}
+          >
+            🗑 Clear
+          </button>
 
           <div className={styles.toggleWrapper}>
             Compact View
@@ -23,126 +75,79 @@ export default function ComparePage() {
         <div className={styles.lastUpdated}>Last updated: Today, 09:12 AM</div>
       </div>
 
-      <div className={styles.grid}>
-        <div>
-          <div style={{ height: '84px', marginBottom: '24px' }}></div>
-
-          <div className={styles.attrList}>
-            <div className={styles.matrixTitle}>≡ Comparison Matrix</div>
-            <div className={styles.attrLabel}>Attribute</div>
-            <div className={styles.attrLabel}>Price</div>
-            <div className={styles.attrLabel}>Brand</div>
-            <div className={styles.attrLabel}>Key Specifications</div>
-            <div className={styles.attrLabel}>Shipping</div>
-            <div className={styles.attrLabel}>Seller Rating</div>
-          </div>
+      {products.length === 0 ? (
+        <div className={styles.emptyState}>
+          <h2>Список порівняння порожній</h2>
+          <p>Додайте товари з каталогу, щоб порівняти їхні характеристики.</p>
         </div>
-
-        <div>
-          <div className={styles.productHeader}>
-            <button className={styles.closeBtn}>✕</button>
-            <img
-              src="https://images.unsplash.com/photo-1618384887929-16ec33fab9ef?w=150&q=80"
-              alt="OrionX"
-            />
-            <div className={styles.productHeaderInfo}>
-              <h3>OrionX Pro Headphones</h3>
-              <p>
-                $199.99
-                <br />
-                Brand: Stellaris Audio
-              </p>
-            </div>
-          </div>
-          <div className={styles.dataCol}>
-            <div className={styles.dataTitle}>OrionX Pro Headphones</div>
-            <div className={styles.dataCell}></div>
-            <div className={styles.dataCell}>
-              <div className={styles.priceBox}>$199.99</div>
-            </div>
-            <div className={styles.dataCell}>Stellaris Audio</div>
-            <div className={styles.dataCell}>
-              <span className={styles.boldText}>
-                Almost good like Auralux...
-              </span>
-            </div>
-            <div className={styles.dataCell}>Free 2-3 day shipping</div>
-            <div className={styles.dataCell}>
-              <span className={styles.rating}>★ 4.5</span>
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <div className={styles.productHeader}>
-            <button className={styles.closeBtn}>✕</button>
-            <img
-              src="https://images.unsplash.com/photo-1624462966581-bc6d768cbce5?w=150&q=80"
-              alt="NovaCharge"
-            />
-            <div className={styles.productHeaderInfo}>
-              <h3>NovaCharge 65W Charger</h3>
-              <p>
-                $49.50
-                <br />
-                Brand: VoltEdge
-              </p>
-            </div>
-          </div>
-          <div className={styles.dataCol}>
-            <div className={styles.dataTitle}>NovaCharge 65W Charger</div>
-            <div className={styles.dataCell}></div>
-            <div className={styles.dataCell}>
-              <div className={`${styles.priceBox} ${styles.priceBoxGreen}`}>
-                $49.50
+      ) : (
+        <div
+          className={styles.grid}
+          style={{
+            gridTemplateColumns: `200px repeat(${products.length}, minmax(220px, 320px))`,
+          }}
+        >
+          <div>
+            <div className={styles.matrixHeaderCard}>
+              <div className={styles.matrixTitle}>≡ Comparison Matrix</div>
+              <div className={styles.matrixSubtitle}>
+                {products.length} items selected
               </div>
             </div>
-            <div className={styles.dataCell}>VoltEdge</div>
-            <div className={styles.dataCell}>
-              <span className={styles.boldText}>
-                Good, but not really like Auralux...
-              </span>
-            </div>
-            <div className={styles.dataCell}>Standard shipping: 3-5 days</div>
-            <div className={styles.dataCell}>
-              <span className={styles.rating}>★ 4.8</span> &nbsp;• VoltEdge
-            </div>
-          </div>
-        </div>
 
-        <div>
-          <div className={styles.productHeader}>
-            <button className={styles.closeBtn}>✕</button>
-            <img
-              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=150&q=80"
-              alt="Auralux"
-            />
-            <div className={styles.productHeaderInfo}>
-              <h3>Auralux NC-7000 Wireless</h3>
-              <p>
-                $189.00
-                <br />
-                Brand: AstraTech
-              </p>
+            <div className={styles.attrList}>
+              <div className={styles.attrLabel}>Price</div>
+              <div className={styles.attrLabel}>Brand</div>
+              <div className={styles.attrLabel}>Key Specifications</div>
+              <div className={styles.attrLabel}>Shipping</div>
+              <div className={styles.attrLabel}>Seller Rating</div>
             </div>
           </div>
-          <div className={styles.dataCol}>
-            <div className={styles.dataTitle}>Auralux NC-7000 Wireless</div>
-            <div className={styles.dataCell}></div>
-            <div className={styles.dataCell}>
-              <div className={styles.priceBox}>$189.00</div>
+
+          {products.map((product) => (
+            <div key={product.id}>
+              <div className={styles.productHeader}>
+                <button
+                  className={styles.closeBtn}
+                  onClick={() => handleRemove(product.id)}
+                  title="Remove item"
+                >
+                  ✕
+                </button>
+                <img src={product.img} alt={product.title} />
+                <div className={styles.productHeaderInfo}>
+                  <h3>{product.title}</h3>
+                  <p>
+                    {product.price}
+                    <br />
+                    Brand: {product.brand}
+                  </p>
+                </div>
+              </div>
+
+              <div className={styles.dataCol}>
+                <div className={styles.dataCell}>
+                  <div
+                    className={`${styles.priceBox} ${
+                      product.isBestPrice ? styles.priceBoxGreen : ''
+                    }`}
+                  >
+                    {product.price}
+                  </div>
+                </div>
+                <div className={styles.dataCell}>{product.brand}</div>
+                <div className={styles.dataCell}>
+                  <span className={styles.boldText}>{product.specs}</span>
+                </div>
+                <div className={styles.dataCell}>{product.shipping}</div>
+                <div className={styles.dataCell}>
+                  <span className={styles.rating}>★ {product.rating}</span>
+                </div>
+              </div>
             </div>
-            <div className={styles.dataCell}>AstraTech</div>
-            <div className={styles.dataCell}>
-              <span className={styles.boldText}>As good as always!</span>
-            </div>
-            <div className={styles.dataCell}>Expedited shipping available</div>
-            <div className={styles.dataCell}>
-              <span className={styles.rating}>★ 4.3</span> &nbsp;• AstraTech
-            </div>
-          </div>
+          ))}
         </div>
-      </div>
+      )}
     </main>
   );
 }

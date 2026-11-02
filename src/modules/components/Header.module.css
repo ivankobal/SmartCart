@@ -1,0 +1,161 @@
+.header {
+  background-color: #1a1c23;
+  border-bottom: 1px solid #2d3139;
+  padding: 12px 32px;
+  display: flex; /* Змінили на flex */
+  align-items: center;
+  width: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.logoIcon {
+  background-color: #21252d;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.navLink {
+  color: #9ca3af;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.navLink:hover,
+.activeLink {
+  color: #ffffff;
+}
+
+.searchContainer {
+  margin-left: 32px; /* Відступ відразу після навігації */
+  width: 100%;
+  max-width: 360px;
+}
+
+.searchBar {
+  width: 100%;
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  color: #fff;
+  font-size: 13px;
+  outline: none;
+}
+
+.searchBar::placeholder {
+  color: #6b7280;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto; /* Притискає кнопку Account у самий правий край */
+}
+
+.accountBtn {
+  background-color: #10b981;
+  color: #fff;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.accountBtn:hover {
+  background-color: #059669;
+}
+
+.profileIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #121418;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.navItem {
+  position: relative;
+}
+
+.filtersDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 12px;
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 8px;
+  padding: 16px;
+  width: 220px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.filterGroup h4 {
+  margin: 0 0 10px 0;
+  font-size: 13px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.filterLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.filterLabel input {
+  cursor: pointer;
+}

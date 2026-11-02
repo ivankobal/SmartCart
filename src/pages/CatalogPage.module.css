@@ -1,0 +1,160 @@
+.main {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 48px 60px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.breadcrumbs {
+  font-size: 13px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.pageTitle {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: #ffffff;
+  margin-top: 0;
+}
+
+.catalogGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.productCard {
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardInfo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.itemTitle {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 6px 0;
+}
+
+.itemSpecs {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0 0 16px 0;
+}
+
+.itemPrice {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 20px 0;
+}
+
+.cardActions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.compareLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.compareLabel input {
+  cursor: pointer;
+  width: 14px;
+  height: 14px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 8px;
+}
+
+.btn {
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background-color: #e5e7eb;
+  color: #121418;
+}
+
+.btnPrimary {
+  background-color: #ffffff;
+  color: #121418;
+}
+
+.paginationBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paginationPills {
+  display: flex;
+  gap: 12px;
+}
+
+.pageDot {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  color: #121418;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.pageCounter {
+  font-size: 13px;
+  color: #9ca3af;
+}

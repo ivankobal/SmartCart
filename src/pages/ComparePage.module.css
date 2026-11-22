@@ -1,0 +1,234 @@
+.main {
+  flex: 1;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 48px 60px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.topBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btnWhite {
+  background-color: #ffffff;
+  color: #121418;
+}
+.btnGreen {
+  background-color: #10b981;
+  color: #ffffff;
+}
+.btnDark {
+  background-color: #21252d;
+  color: #ffffff;
+  border: 1px solid #323842;
+}
+
+.toggleWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  color: #9ca3af;
+  margin-left: 16px;
+}
+
+.toggle {
+  width: 40px;
+  height: 22px;
+  background-color: #10b981;
+  border-radius: 12px;
+  position: relative;
+  cursor: pointer;
+}
+
+.toggleKnob {
+  width: 18px;
+  height: 18px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+}
+
+.lastUpdated {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 200px repeat(3, 1fr);
+  gap: 24px;
+}
+
+.productHeader {
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #323842;
+  border: none;
+  color: #9ca3af;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background-color: #4b5563;
+  color: #fff;
+}
+
+.productHeader img {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.imagePlaceholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #323842;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #9ca3af;
+}
+
+.productHeaderInfo h3 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.productHeaderInfo p {
+  font-size: 11px;
+  color: #9ca3af;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.attrList {
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+}
+
+.matrixTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  margin-bottom: 16px;
+}
+
+.attrLabel {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.dataCol {
+  background-color: #21252d;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dataTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.dataCell {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: #ffffff;
+  border-bottom: 1px solid transparent;
+}
+
+.priceBox {
+  background-color: #2d3139;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.priceBoxGreen {
+  background-color: #10b981;
+}
+
+.rating {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.boldText {
+  font-weight: 600;
+}

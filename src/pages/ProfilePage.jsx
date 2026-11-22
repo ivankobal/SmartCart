@@ -1,34 +1,32 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { storageService } from '../services/storageService';
+import { useShop } from '../context/ShopContext.jsx';
 import styles from './ProfilePage.module.css';
+import { UserIcon } from '../modules/components/Icons.jsx';
 
 export default function ProfilePage() {
   const navigate = useNavigate();
   const { logout } = useAuth();
+  const { cart, cartSummary, removeFromCart } = useShop();
 
-  const token = localStorage.getItem('smartcart_token');
-  const userName = localStorage.getItem('smartcart_user_name') || 'Гість';
-  const userEmail =
-    localStorage.getItem('smartcart_user_email') || 'не вказано';
+  const user = storageService.getUser();
 
   const handleLogout = () => {
     logout();
     navigate('/auth');
   };
 
-  if (!token) {
+  if (!user) {
     return (
       <main className={styles.main}>
-        <div
-          className={styles.section}
-          style={{ textAlign: 'center', padding: '48px 24px' }}
-        >
-          <h2>Enter into account </h2>
-          <p style={{ color: '#9ca3af', marginBottom: '24px' }}>
-            To view profile page and saved products authorize in system
+        <div className={`${styles.section} ${styles.authPrompt}`}>
+          <h2>Sign in to Your Account</h2>
+          <p className={styles.authPromptText}>
+            Authorize in the system to view your profile and saved products.
           </p>
           <button onClick={() => navigate('/auth')} className={styles.btn}>
-            Enter / Register
+            Sign In / Register
           </button>
         </div>
       </main>
@@ -38,20 +36,82 @@ export default function ProfilePage() {
   return (
     <main className={styles.main}>
       <div className={styles.profileCard}>
-        <div className={styles.avatar}>👤</div>
+        <div className={styles.avatar}>
+          <UserIcon size={28} />
+        </div>
         <div>
-          <h2>{userName}</h2>
-          <p className={styles.email}>{userEmail}</p>
+          <h2>{user.name}</h2>
+          <p className={styles.email}>{user.email}</p>
         </div>
       </div>
 
       <div className={styles.section}>
-        <h3>Saved products</h3>
-        You don't have any saved products yet
+        <div className={styles.sectionHeader}>
+          <h3>Saved Products ({cartSummary.totalItems})</h3>
+          {cart.length > 0 && (
+            <span className={styles.totalBadge}>
+              Total: {cartSummary.formattedTotal}
+            </span>
+          )}
+        </div>
+
+        {cart.length === 0 ? (
+          <div>
+            <p className={styles.emptyText}>
+              You don't have any saved products yet.
+            </p>
+            <Link to="/catalog" className={styles.btn}>
+              Browse Catalog
+            </Link>
+          </div>
+        ) : (
+          <>
+            <div className={styles.itemList}>
+              {cart.map((item) => (
+                <div key={item.id} className={styles.item}>
+                  <div className={styles.itemLeft}>
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className={styles.itemImg}
+                    />
+                    <div>
+                      <Link
+                        to={`/product/${item.id}`}
+                        className={styles.itemTitle}
+                      >
+                        {item.title}
+                      </Link>
+                      <p className={styles.price}>
+                        {item.price} × {item.quantity} pcs
+                      </p>
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className={styles.removeBtn}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className={styles.sectionFooter}>
+              <Link to="/cart" className={styles.btn}>
+                Edit Cart
+              </Link>
+              <Link to="/checkout" className={styles.checkoutLink}>
+                Proceed to Checkout
+              </Link>
+            </div>
+          </>
+        )}
       </div>
 
       <button onClick={handleLogout} className={styles.logoutBtn}>
-        Quit
+        Sign Out
       </button>
     </main>
   );

@@ -1,58 +1,73 @@
+import { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './ProductDetailPage.module.css';
-import products from '../data/products.js';
+import { useProduct } from '../hooks/useProduct.js';
+import { useShop } from '../context/ShopContext.jsx';
+import { getSellersForProduct } from '../utils/sellerHelper.js';
+import { CATALOG_SECTIONS } from '../data/catalogStructure.js';
+
+const VARIANT_CLASS_MAP = {
+  pink: styles.sellerPink,
+  emerald: styles.sellerEmerald,
+  blue: styles.sellerBlue,
+  amber: styles.sellerAmber,
+};
+
 export default function ProductDetailPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const product = useProduct(id);
+  const { compareList, addToCompare, removeFromCompare, addToCart } = useShop();
 
-  const product = products[Number(id) - 1];
+  const sellers = useMemo(() => getSellersForProduct(product), [product]);
+
   if (!product) {
     return (
       <main className={styles.main}>
-        <h2>Товар #{id} завантажується або не знайдений...</h2>
+        <h2>Loading product #{id} or product not found...</h2>
         <button onClick={() => navigate('/catalog')} className={styles.btn}>
-          ← Повернутися до каталогу
+          ← Back to Catalog
         </button>
       </main>
     );
   }
 
-  const sellers = [
-    {
-      name: 'SoundWorld Marketplace',
-      info: 'Ships in 1-2 days • Free returns',
-      price: product.price,
-      bg: '#ec4899',
-      icon: '🛍️',
-    },
-    {
-      name: 'ElectroDirect',
-      info: 'Ships in 2-4 days • $5 shipping',
-      price: product.price,
-      bg: '#10b981',
-      icon: '💳',
-    },
-  ];
+  const isCompared = compareList.some((p) => p.id === product.id);
+
+  const sectionObj = CATALOG_SECTIONS.find((s) => s.id === product.section);
+  const sectionLabel = sectionObj ? sectionObj.shortTitle : 'Catalog';
+
+  const handleCompareToggle = () => {
+    if (isCompared) {
+      removeFromCompare(product.id);
+    } else {
+      addToCompare(product);
+    }
+  };
 
   return (
     <main className={styles.main}>
       <div className={styles.breadcrumbs}>
         <span
-          onClick={() => navigate('/catalog')}
-          style={{ cursor: 'pointer', color: '#10b981' }}
+          onClick={() => navigate('/home')}
+          className={styles.breadcrumbLink}
         >
           Home
         </span>{' '}
-        &gt;
+        &gt;{' '}
         <span
-          onClick={() => navigate('/catalog')}
-          style={{ cursor: 'pointer', color: '#10b981' }}
+          onClick={() =>
+            navigate(
+              product.section
+                ? `/catalog?section=${product.section}`
+                : '/catalog',
+            )
+          }
+          className={styles.breadcrumbLink}
         >
-          {' '}
-          Electronics
+          {sectionLabel}
         </span>{' '}
-        &gt;
-        <span> {product.title}</span>
+        &gt; <span>{product.title}</span>
       </div>
 
       <div className={styles.layout}>
@@ -74,7 +89,7 @@ export default function ProductDetailPage() {
 
           <div className={styles.sectionHeader}>
             <span>Price comparison</span>
-            <span>2 sellers</span>
+            <span>{sellers.length} sellers</span>
           </div>
 
           <div className={styles.sellerList}>
@@ -82,10 +97,11 @@ export default function ProductDetailPage() {
               <div key={idx} className={styles.sellerCard}>
                 <div className={styles.sellerLeft}>
                   <div
-                    className={styles.sellerIcon}
-                    style={{ backgroundColor: s.bg }}
+                    className={`${styles.sellerIcon} ${
+                      VARIANT_CLASS_MAP[s.variant] || styles.sellerEmerald
+                    }`}
                   >
-                    {s.icon}
+                    {s.badge}
                   </div>
                   <div>
                     <div className={styles.sellerName}>{s.name}</div>
@@ -94,17 +110,35 @@ export default function ProductDetailPage() {
                 </div>
                 <div className={styles.sellerRight}>
                   <div className={styles.sellerPrice}>{s.price}</div>
-                  <button className={styles.visitBtn}>Visit</button>
+                  <button
+                    className={styles.visitBtn}
+                    onClick={() => {
+                      addToCart({
+                        ...product,
+                        price: s.price,
+                        numericPrice: s.numericPrice,
+                      });
+                      navigate('/cart');
+                    }}
+                  >
+                    Buy
+                  </button>
                 </div>
               </div>
             ))}
           </div>
 
           <div className={styles.actions}>
-            <button className={`${styles.btn} ${styles.btnCompare}`}>
-              Compare
+            <button
+              className={`${styles.btn} ${styles.btnCompare}`}
+              onClick={handleCompareToggle}
+            >
+              {isCompared ? 'In Comparison' : 'Compare'}
             </button>
-            <button className={`${styles.btn} ${styles.btnAdd}`}>
+            <button
+              className={`${styles.btn} ${styles.btnAdd}`}
+              onClick={() => addToCart(product)}
+            >
               Add to list
             </button>
           </div>

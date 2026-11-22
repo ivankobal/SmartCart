@@ -5,6 +5,7 @@
   display: flex;
   align-items: center;
   width: 100%;
+  box-sizing: border-box;
   font-family:
     -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
@@ -36,8 +37,8 @@
   justify-content: center;
   font-size: 14px;
   text-decoration: none;
+  color: #ffffff;
 }
-
 .brand {
   color: white;
   text-decoration: none;
@@ -59,16 +60,44 @@
   padding: 0;
   transition: color 0.2s;
   text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link:hover {
+  color: #e5e7eb;
 }
 
 .active {
   color: white;
 }
 
+.badge {
+  background-color: #10b981;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 9999px;
+  line-height: 1.4;
+}
+
 .searchContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
   margin-left: 32px;
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  font-size: 12px;
+  color: #6b7280;
+  pointer-events: none;
 }
 
 .searchBar {
@@ -76,14 +105,41 @@
   background-color: #21252d;
   border: 1px solid #323842;
   border-radius: 9999px;
-  padding: 8px 16px;
+  padding: 8px 34px 8px 36px;
   color: #fff;
   font-size: 13px;
   outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+}
+
+.searchBar:focus {
+  border-color: #10b981;
 }
 
 .searchBar::placeholder {
   color: #6b7280;
+}
+
+.clearSearchBtn {
+  position: absolute;
+  right: 10px;
+  background: #323842;
+  border: none;
+  color: #9ca3af;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.clearSearchBtn:hover {
+  background: #4b5563;
+  color: #ffffff;
 }
 
 .rightSection {
@@ -123,46 +179,5 @@
   justify-content: center;
   cursor: pointer;
   font-size: 14px;
-}
-
-.navItem {
-  position: relative;
-}
-
-.filtersDropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 12px;
-  background-color: #21252d;
-  border: 1px solid #323842;
-  border-radius: 8px;
-  padding: 16px;
-  width: 220px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.filterGroup h4 {
-  margin: 0 0 10px 0;
-  font-size: 13px;
-  color: #fff;
-  font-weight: 600;
-}
-
-.filterLabel {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  color: #9ca3af;
-  cursor: pointer;
-  margin-bottom: 8px;
-}
-
-.filterLabel input {
-  cursor: pointer;
+  text-decoration: none;
 }

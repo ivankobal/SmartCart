@@ -1,115 +1,191 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './ComparePage.module.css';
-
-const initialProducts = [
-  {
-    id: 1,
-    title: 'OrionX Pro Headphones',
-    brand: 'Stellaris Audio',
-    price: '$199.99',
-    isBestPrice: false,
-    specs: 'Almost good like Auralux...',
-    shipping: 'Free 2-3 day shipping',
-    rating: '4.5',
-    img: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 2,
-    title: 'NovaCharge 65W Charger',
-    brand: 'VoltEdge',
-    price: '$49.50',
-    isBestPrice: true,
-    specs: 'Good, but not really like Auralux...',
-    shipping: 'Standard shipping: 3-5 days',
-    rating: '4.8',
-    img: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=500&auto=format&fit=crop&q=80',
-  },
-  {
-    id: 3,
-    title: 'Auralux NC-7000 Wireless',
-    brand: 'AstraTech',
-    price: '$189.00',
-    isBestPrice: false,
-    specs: 'As good as always!',
-    shipping: 'Expedited shipping available',
-    rating: '4.3',
-    img: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500&auto=format&fit=crop&q=80',
-  },
-];
+import { useShop } from '../context/ShopContext.jsx';
+import {
+  analyzeComparison,
+  sortComparisonItems,
+} from '../utils/compareHelper.js';
 
 export default function ComparePage() {
-  const [products, setProducts] = useState(initialProducts);
+  const { compareList, removeFromCompare, clearCompare, addToCart } = useShop();
+  const [onlyDifferences, setOnlyDifferences] = useState(false);
+  const [copiedNotice, setCopiedNotice] = useState(false);
+  const [sortConfig, setSortConfig] = useState({ key: null, direction: 'asc' });
 
-  const handleRemove = (id) => {
-    setProducts(products.filter((p) => p.id !== id));
+  const analysis = useMemo(() => analyzeComparison(compareList), [compareList]);
+
+  const sortedItems = useMemo(
+    () => sortComparisonItems(analysis.items, sortConfig),
+    [analysis.items, sortConfig],
+  );
+
+  const handleSortClick = (key) => {
+    setSortConfig((prev) => {
+      if (prev.key === key) {
+        if (prev.direction === 'asc') {
+          return { key, direction: 'desc' };
+        }
+        return { key: null, direction: 'asc' };
+      }
+      return { key, direction: key === 'specs' ? 'desc' : 'asc' };
+    });
   };
 
-  const handleClear = () => {
-    setProducts([]);
+  const renderSortIndicator = (key) => {
+    if (sortConfig.key !== key) {
+      return <span className={styles.sortInactive}>⇅</span>;
+    }
+    return (
+      <span className={styles.sortActive}>
+        {sortConfig.direction === 'asc' ? '↑' : '↓'}
+      </span>
+    );
+  };
+
+  const handleShare = () => {
+    navigator.clipboard?.writeText(window.location.href);
+    setCopiedNotice(true);
+    setTimeout(() => setCopiedNotice(false), 2500);
   };
 
   return (
     <main className={styles.main}>
       <div className={styles.topBar}>
         <div className={styles.controls}>
-          <button className={`${styles.btn} ${styles.btnWhite}`}>
-            Save Comparison
-          </button>
-          <button className={`${styles.btn} ${styles.btnGreen}`}>
-            🔗 Share
-          </button>
+          <Link to="/catalog" className={`${styles.btn} ${styles.btnWhite}`}>
+            + Add Products
+          </Link>
+
           <button
-            className={`${styles.btn} ${styles.btnDark}`}
-            onClick={handleClear}
+            className={`${styles.btn} ${styles.btnGreen}`}
+            onClick={handleShare}
           >
-            🗑 Clear
+            {copiedNotice ? '✓ Link Copied!' : 'Share Link'}
           </button>
 
-          <div className={styles.toggleWrapper}>
-            Compact View
-            <div className={styles.toggle}>
-              <div className={styles.toggleKnob}></div>
+          {compareList.length > 0 && (
+            <button
+              className={`${styles.btn} ${styles.btnDark}`}
+              onClick={clearCompare}
+            >
+              Clear
+            </button>
+          )}
+
+          {compareList.length > 1 && (
+            <div
+              className={styles.toggleWrapper}
+              onClick={() => setOnlyDifferences((prev) => !prev)}
+            >
+              Only Differences
+              <div
+                className={`${styles.toggle} ${
+                  onlyDifferences ? styles.toggleActive : ''
+                }`}
+              >
+                <div
+                  className={`${styles.toggleKnob} ${
+                    onlyDifferences ? styles.toggleKnobActive : ''
+                  }`}
+                ></div>
+              </div>
             </div>
-          </div>
+          )}
         </div>
-        <div className={styles.lastUpdated}>Last updated: Today, 09:12 AM</div>
+
+        <div className={styles.lastUpdated}>
+          {compareList.length > 0
+            ? `Comparing ${compareList.length} ${compareList.length === 1 ? 'item' : 'items'}`
+            : 'No active comparison'}
+        </div>
       </div>
 
-      {products.length === 0 ? (
+      {compareList.length === 0 ? (
         <div className={styles.emptyState}>
-          <h2>Список порівняння порожній</h2>
-          <p>Додайте товари з каталогу, щоб порівняти їхні характеристики.</p>
+          <h2>Comparison list is empty</h2>
+          <p className={styles.emptyStateText}>
+            Select two or more products in the catalog to compare their prices
+            and specifications.
+          </p>
+          <Link to="/catalog" className={`${styles.btn} ${styles.btnGreen}`}>
+            Go to Catalog
+          </Link>
         </div>
       ) : (
         <div
           className={styles.grid}
           style={{
-            gridTemplateColumns: `200px repeat(${products.length}, minmax(220px, 320px))`,
+            gridTemplateColumns: `210px repeat(${sortedItems.length}, minmax(240px, 320px))`,
           }}
         >
           <div>
             <div className={styles.matrixHeaderCard}>
-              <div className={styles.matrixTitle}>≡ Comparison Matrix</div>
+              <div className={styles.matrixTitle}>Comparison Matrix</div>
               <div className={styles.matrixSubtitle}>
-                {products.length} items selected
+                Click row label to sort
               </div>
             </div>
 
             <div className={styles.attrList}>
-              <div className={styles.attrLabel}>Price</div>
-              <div className={styles.attrLabel}>Brand</div>
-              <div className={styles.attrLabel}>Key Specifications</div>
-              <div className={styles.attrLabel}>Shipping</div>
-              <div className={styles.attrLabel}>Seller Rating</div>
+              <div
+                className={`${styles.attrLabel} ${styles.attrLabelSortable} ${
+                  sortConfig.key === 'price' ? styles.attrLabelActive : ''
+                }`}
+                onClick={() => handleSortClick('price')}
+                title="Sort by Price"
+              >
+                <span>Price & Advantage</span>
+                {renderSortIndicator('price')}
+              </div>
+
+              {(!onlyDifferences || !analysis.hasSameCategory) && (
+                <div
+                  className={`${styles.attrLabel} ${styles.attrLabelSortable} ${
+                    sortConfig.key === 'category' ? styles.attrLabelActive : ''
+                  }`}
+                  onClick={() => handleSortClick('category')}
+                  title="Sort by Category (A-Z)"
+                >
+                  <span>Category (A-Z)</span>
+                  {renderSortIndicator('category')}
+                </div>
+              )}
+
+              {(!onlyDifferences || !analysis.hasSameBrand) && (
+                <div
+                  className={`${styles.attrLabel} ${styles.attrLabelSortable} ${
+                    sortConfig.key === 'brand' ? styles.attrLabelActive : ''
+                  }`}
+                  onClick={() => handleSortClick('brand')}
+                  title="Sort by Brand (A-Z)"
+                >
+                  <span>Brand (A-Z)</span>
+                  {renderSortIndicator('brand')}
+                </div>
+              )}
+
+              <div
+                className={`${styles.attrLabel} ${styles.attrLabelSortable} ${
+                  styles.attrLabelSpecs
+                } ${sortConfig.key === 'specs' ? styles.attrLabelActive : ''}`}
+                onClick={() => handleSortClick('specs')}
+                title="Sort by Specs count"
+              >
+                <span>Key Specifications</span>
+                {renderSortIndicator('specs')}
+              </div>
+
+              <div className={styles.attrLabel}>Action</div>
             </div>
           </div>
 
-          {products.map((product) => (
+          {sortedItems.map((product) => (
             <div key={product.id}>
               <div className={styles.productHeader}>
                 <button
                   className={styles.closeBtn}
-                  onClick={() => handleRemove(product.id)}
+                  onClick={() => removeFromCompare(product.id)}
                   title="Remove item"
                 >
                   ✕
@@ -120,7 +196,7 @@ export default function ComparePage() {
                   <p>
                     {product.price}
                     <br />
-                    Brand: {product.brand}
+                    Brand: {product.brand || 'N/A'}
                   </p>
                 </div>
               </div>
@@ -132,16 +208,53 @@ export default function ComparePage() {
                       product.isBestPrice ? styles.priceBoxGreen : ''
                     }`}
                   >
-                    {product.price}
+                    <span>{product.price}</span>
+                    {product.isBestPrice && (
+                      <span className={styles.bestBadge}>Best price</span>
+                    )}
+                    {!product.isBestPrice && product.priceDiff > 0 && (
+                      <span className={styles.priceDiff}>
+                        +{product.priceDiff.toLocaleString('uk-UA')} ₴
+                      </span>
+                    )}
                   </div>
                 </div>
-                <div className={styles.dataCell}>{product.brand}</div>
-                <div className={styles.dataCell}>
-                  <span className={styles.boldText}>{product.specs}</span>
+
+                {(!onlyDifferences || !analysis.hasSameCategory) && (
+                  <div className={`${styles.dataCell} ${styles.categoryCell}`}>
+                    {product.category || 'Electronics'}
+                  </div>
+                )}
+
+                {(!onlyDifferences || !analysis.hasSameBrand) && (
+                  <div className={styles.dataCell}>
+                    <span className={styles.boldText}>
+                      {product.brand || 'N/A'}
+                    </span>
+                  </div>
+                )}
+
+                <div className={`${styles.dataCell} ${styles.specsCell}`}>
+                  <ul className={styles.specsList}>
+                    {product.parsedSpecs.map((spec, index) => (
+                      <li key={index}>{spec}</li>
+                    ))}
+                  </ul>
                 </div>
-                <div className={styles.dataCell}>{product.shipping}</div>
-                <div className={styles.dataCell}>
-                  <span className={styles.rating}>★ {product.rating}</span>
+
+                <div className={`${styles.dataCell} ${styles.actionsCell}`}>
+                  <Link
+                    to={`/product/${product.id}`}
+                    className={`${styles.btn} ${styles.btnDark}`}
+                  >
+                    Details
+                  </Link>
+                  <button
+                    className={`${styles.btn} ${styles.btnWhite}`}
+                    onClick={() => addToCart(product)}
+                  >
+                    Add to list
+                  </button>
                 </div>
               </div>
             </div>

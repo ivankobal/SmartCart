@@ -1,0 +1,249 @@
+.main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 32px 24px 60px;
+  color: #ffffff;
+}
+
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.pageTitle {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.clearBtn {
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 9999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.clearBtn:hover {
+  background-color: rgba(239, 68, 68, 0.12);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.itemImg {
+  width: 84px;
+  height: 84px;
+  border-radius: 8px;
+  object-fit: cover;
+  background-color: #ffffff;
+  flex-shrink: 0;
+}
+
+.itemInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.itemTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.itemTitle:hover {
+  color: #10b981;
+}
+
+.itemMeta {
+  font-size: 12px;
+  color: #9ca3af;
+  margin: 0 0 8px 0;
+}
+
+.itemPrice {
+  font-size: 15px;
+  font-weight: 700;
+  color: #10b981;
+  margin: 0;
+}
+
+.qtyControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #121418;
+  border: 1px solid #323842;
+  border-radius: 9999px;
+  padding: 4px 10px;
+}
+
+.qtyBtn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qtyBtn:hover {
+  color: #10b981;
+}
+
+.qtyValue {
+  font-size: 14px;
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.removeBtn {
+  background-color: #2d3139;
+  border: none;
+  color: #9ca3af;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.removeBtn:hover {
+  background-color: #ef4444;
+  color: #ffffff;
+}
+
+.summaryCard {
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.summaryTitle {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #323842;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  color: #9ca3af;
+  margin-bottom: 12px;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #323842;
+}
+
+.checkoutBtn {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  text-decoration: none;
+  margin-top: 20px;
+  padding: 12px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  color: #ffffff;
+  border: none;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.checkoutBtn:hover {
+  background-color: #059669;
+}
+
+.freeDelivery {
+  color: #10b981;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 64px 20px;
+  background-color: #21252d;
+  border: 1px solid #323842;
+  border-radius: 12px;
+  color: #9ca3af;
+}
+
+.emptyState h2 {
+  color: #ffffff;
+  margin: 0 0 8px 0;
+}
+
+.catalogLink {
+  display: inline-block;
+  margin-top: 16px;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+}

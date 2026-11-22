@@ -9,6 +9,8 @@ import AuthPage from './pages/AuthPage';
 import RegisterPage from './pages/RegisterPage.jsx';
 import HomePage from './pages/HomePage.jsx';
 import ProfilePage from './pages/ProfilePage.jsx';
+import CartPage from './pages/CartPage.jsx';
+import CheckoutPage from './pages/CheckoutPage.jsx';
 
 export default function App() {
   return (
@@ -22,10 +24,12 @@ export default function App() {
           <Route path="/catalog" element={<CatalogPage />} />
           <Route path="/product/:id" element={<ProductDetailPage />} />
           <Route path="/compare" element={<ComparePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/auth" element={<AuthPage />} />
           <Route path="/signup" element={<RegisterPage />} />
           <Route path="/profile" element={<ProfilePage />} />
-          <Route path="*" element={<h2>Сторінку не знайдено (404)</h2>} />
+          <Route path="*" element={<h2>Page Not Found (404)</h2>} />
         </Routes>
       </main>
 

@@ -1,44 +1,55 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './HomePage.module.css';
-
-const categories = [
-  { id: 'smartphones', title: '📱 smartphones', count: '1,240 products' },
-  { id: 'laptops', title: '💻 laptops', count: '850 products' },
-  { id: 'headphones', title: '🎧 headphones', count: '620 products' },
-  { id: 'watches', title: '⌚ watches', count: '410 products' },
-  { id: 'tv', title: '📺 TV', count: '310 products' },
-  { id: 'audio', title: '🔊 audio', count: '190 products' },
-];
+import { CATALOG_SECTIONS } from '../data/catalogStructure.js';
 
 export default function HomePage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/catalog?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate('/catalog');
+    }
+  };
+
   return (
     <main className={styles.main}>
       <section className={styles.hero}>
-        <h1 className={styles.title}>SmartCart — Пошук кращих цін</h1>
+        <h1 className={styles.title}>SmartCart — Best Price Aggregator</h1>
         <p className={styles.subtitle}>
-          Порівнюйте ціни на електроніку у сотнях магазинів та обирайте
-          найвигідніші пропозиції.
+          Compare prices across electronics, home appliances, groceries, and
+          everyday essentials in one place.
         </p>
 
-        <div className={styles.searchBar}>
+        <form onSubmit={handleSearch} className={styles.searchBar}>
           <input
             type="text"
-            placeholder="Пошук товарів (наприклад, Sony, iPad...)"
+            placeholder="Search products (e.g., Lavazza, Sony, Dyson...)"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className={styles.input}
           />
-          <Link to="/catalog" className={styles.btnPrimary}>
-            До каталогу
-          </Link>
-        </div>
+          <button type="submit" className={styles.btnPrimary}>
+            Search
+          </button>
+        </form>
       </section>
 
-      <h2 className={styles.sectionTitle}>Популярні категорії</h2>
+      <h2 className={styles.sectionTitle}>Catalog Sections</h2>
 
       <div className={styles.categoriesDeck}>
-        {categories.map((cat) => (
-          <Link key={cat.id} to="/catalog" className={styles.card}>
-            <h3>{cat.title}</h3>
-            <p>{cat.count}</p>
+        {CATALOG_SECTIONS.map((sec) => (
+          <Link
+            key={sec.id}
+            to={`/catalog?section=${sec.id}`}
+            className={styles.card}
+          >
+            <h3>{sec.title}</h3>
+            <p>{sec.description}</p>
           </Link>
         ))}
       </div>

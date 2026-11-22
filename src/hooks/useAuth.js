@@ -1,72 +1,52 @@
 import { useState } from 'react';
+import { authApi } from '../api/authApi.js';
+import { storageService } from '../services/storageService';
 
 export function useAuth() {
   const [isAuthLoading, setIsAuthLoading] = useState(false);
 
-  // Отримання масиву всіх користувачів
-  const getUsers = () => {
-    const users = localStorage.getItem('smartcart_registered_users');
-    return users ? JSON.parse(users) : [];
-  };
-
-  // Вхід у систему за поштою та паролем
   const login = async (email, password) => {
     setIsAuthLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const data = await authApi.login({ email, password });
 
-    const users = getUsers();
-    // Шукаємо користувача з відповідним email та password
-    const foundUser = users.find(
-      (u) =>
-        u.email.toLowerCase() === email.toLowerCase() &&
-        u.password === password,
-    );
-
-    if (!foundUser) {
+      if (data.success) {
+        storageService.setAuth(data.token, {
+          name: data.name,
+          email: data.email,
+        });
+        return { success: true };
+      }
+      return { success: false, message: data.message };
+    } catch (err) {
+      return { success: false, message: err.message };
+    } finally {
       setIsAuthLoading(false);
-      return { success: false, message: 'Невірний email або пароль!' };
     }
-
-    // Якщо знайшли — авторизуємо
-    localStorage.setItem('smartcart_token', 'mock-jwt-token-12345');
-    localStorage.setItem('smartcart_user_name', foundUser.name);
-    localStorage.setItem('smartcart_user_email', foundUser.email);
-
-    setIsAuthLoading(false);
-    return { success: true };
   };
 
-  // Реєстрація нового акаунта
   const signup = async (userData) => {
     setIsAuthLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    try {
+      const data = await authApi.signup(userData);
 
-    const users = getUsers();
-    // Перевіряємо, чи існує вже така пошта
-    const existingUser = users.find(
-      (u) => u.email.toLowerCase() === userData.email.toLowerCase(),
-    );
-
-    if (existingUser) {
+      if (data.success) {
+        storageService.setAuth(data.token, {
+          name: data.name,
+          email: data.email,
+        });
+        return { success: true };
+      }
+      return { success: false, message: data.message };
+    } catch (err) {
+      return { success: false, message: err.message };
+    } finally {
       setIsAuthLoading(false);
-      return { success: false, message: 'Користувач з таким email вже існує!' };
     }
-
-    users.push(userData);
-    localStorage.setItem('smartcart_registered_users', JSON.stringify(users));
-
-    localStorage.setItem('smartcart_token', 'mock-jwt-token-12345');
-    localStorage.setItem('smartcart_user_name', userData.name);
-    localStorage.setItem('smartcart_user_email', userData.email);
-
-    setIsAuthLoading(false);
-    return { success: true };
   };
 
   const logout = () => {
-    localStorage.removeItem('smartcart_token');
-    localStorage.removeItem('smartcart_user_name');
-    localStorage.removeItem('smartcart_user_email');
+    storageService.clearAuth();
   };
 
   return { login, signup, logout, isAuthLoading };

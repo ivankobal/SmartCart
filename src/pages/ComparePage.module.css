@@ -28,9 +28,10 @@
   font-weight: 600;
   border: none;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 6px;
+  text-decoration: none;
 }
 
 .btnWhite {
@@ -56,15 +57,22 @@
   font-size: 13px;
   color: #9ca3af;
   margin-left: 16px;
+  cursor: pointer;
+  user-select: none;
 }
 
 .toggle {
   width: 40px;
   height: 22px;
-  background-color: #10b981;
+  background-color: #323842;
   border-radius: 12px;
   position: relative;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.toggleActive {
+  background-color: #10b981;
 }
 
 .toggleKnob {
@@ -74,7 +82,12 @@
   border-radius: 50%;
   position: absolute;
   top: 2px;
-  right: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+}
+
+.toggleKnobActive {
+  transform: translateX(18px);
 }
 
 .lastUpdated {
@@ -129,6 +142,38 @@
   align-items: center;
   font-size: 13px;
   color: #9ca3af;
+}
+
+.attrLabelSortable {
+  cursor: pointer;
+  user-select: none;
+  justify-content: space-between;
+  padding-right: 12px;
+  transition: color 0.15s ease;
+}
+
+.attrLabelSortable:hover {
+  color: #ffffff;
+}
+
+.attrLabelActive {
+  color: #10b981;
+  font-weight: 600;
+}
+
+.attrLabelSpecs {
+  height: 130px;
+}
+
+.sortInactive {
+  opacity: 0.35;
+  font-size: 11px;
+}
+
+.sortActive {
+  color: #10b981;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .productHeader {
@@ -213,6 +258,30 @@
   border-bottom: none;
 }
 
+.categoryCell {
+  text-transform: capitalize;
+}
+
+.specsCell {
+  height: 130px;
+  align-items: flex-start;
+  padding-top: 14px;
+  overflow-y: auto;
+}
+
+.specsList {
+  margin: 0;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+
+.actionsCell {
+  gap: 8px;
+}
+
 .priceBox {
   background-color: #2d3139;
   padding: 10px 16px;
@@ -222,6 +291,7 @@
   width: 100%;
   box-sizing: border-box;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -229,8 +299,16 @@
   background-color: #10b981;
 }
 
-.rating {
-  color: #10b981;
+.bestBadge {
+  font-size: 11px;
+  background-color: rgba(0, 0, 0, 0.25);
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.priceDiff {
+  font-size: 12px;
+  color: #f87171;
   font-weight: 600;
 }
 
@@ -250,4 +328,8 @@
 .emptyState h2 {
   color: #ffffff;
   margin-bottom: 8px;
+}
+
+.emptyStateText {
+  margin-bottom: 20px;
 }

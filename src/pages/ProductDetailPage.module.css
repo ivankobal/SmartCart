@@ -187,3 +187,40 @@
   background-color: #238636;
   color: #ffffff;
 }
+.breadcrumbLink {
+  cursor: pointer;
+  color: #10b981;
+}
+
+.breadcrumbLink:hover {
+  text-decoration: underline;
+}
+
+.sellerIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.sellerPink {
+  background-color: #ec4899;
+}
+
+.sellerEmerald {
+  background-color: #10b981;
+}
+
+.sellerBlue {
+  background-color: #3b82f6;
+}
+
+.sellerAmber {
+  background-color: #f59e0b;
+}

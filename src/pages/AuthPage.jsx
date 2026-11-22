@@ -25,13 +25,12 @@ export default function AuthPage() {
     e.preventDefault();
 
     if (!formData.email || !formData.password) {
-      setError('Заповніть усі поля!');
+      setError('Fill all fields');
       return;
     }
 
     setError('');
 
-    // Передаємо введені дані в хук
     const result = await login(formData.email, formData.password);
 
     if (result.success) {

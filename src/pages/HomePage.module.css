@@ -1,8 +1,10 @@
 .main {
   max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
-  padding: 32px 20px;
+  padding: 32px 20px 60px;
   color: #ffffff;
+  box-sizing: border-box;
 }
 
 .hero {
@@ -42,6 +44,10 @@
   outline: none;
 }
 
+.input:focus {
+  border-color: #10b981;
+}
+
 .btnPrimary {
   background-color: #10b981;
   color: white;
@@ -51,6 +57,12 @@
   font-weight: 600;
   display: inline-flex;
   align-items: center;
+  border: none;
+  cursor: pointer;
+}
+
+.btnPrimary:hover {
+  background-color: #059669;
 }
 
 .sectionTitle {
@@ -59,16 +71,17 @@
 }
 
 .categoriesDeck {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 16px;
 }
 
 .card {
+  flex: 1 1 340px;
   background-color: #21242b;
   border: 1px solid #2d3139;
   border-radius: 12px;
-  padding: 20px 16px;
+  padding: 24px 20px;
   text-decoration: none;
   color: white;
   display: flex;
@@ -77,6 +90,7 @@
   justify-content: center;
   text-align: center;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .card:hover {
@@ -86,8 +100,8 @@
 }
 
 .card h3 {
-  margin: 0 0 6px 0;
-  font-size: 1.05rem;
+  margin: 0 0 8px 0;
+  font-size: 1.1rem;
 }
 
 .card p {

@@ -24,28 +24,24 @@ export default function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const result = await signup(formData);
-    if (result.success) {
-      navigate('/profile');
-    } else {
-      setError(result.message);
-    }
+    setError('');
 
-    if (!formData.name || !formData.email || !formData.password) {
-      setError('Заповніть усі поля!');
+    if (!formData.name.trim() || !formData.email.trim() || !formData.password) {
+      setError('Please fill in all fields!');
       return;
     }
 
     if (formData.password.length < 6) {
-      setError('Пароль має бути не менше 6 символів');
+      setError('Password must be at least 6 characters long');
       return;
     }
 
-    setError('');
+    const result = await signup(formData);
 
-    const success = await signup(formData);
-    if (success) {
+    if (result.success) {
       navigate('/profile');
+    } else {
+      setError(result.message || 'Registration failed');
     }
   };
 

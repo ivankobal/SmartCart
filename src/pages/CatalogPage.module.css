@@ -14,12 +14,117 @@
   margin-bottom: 12px;
 }
 
+.headerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .pageTitle {
   font-size: 26px;
   font-weight: 700;
-  margin-bottom: 32px;
   color: #ffffff;
-  margin-top: 0;
+  margin: 0;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.clearAllBtn {
+  background-color: transparent;
+  color: #9ca3af;
+  border: 1px solid #323842;
+  border-radius: 9999px;
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.clearAllBtn:hover {
+  color: #ffffff;
+  border-color: #4b5563;
+}
+
+.filterBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #21252d;
+  color: #ffffff;
+  border: 1px solid #323842;
+  border-radius: 9999px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.15s ease;
+}
+
+.filterBtn:hover {
+  border-color: #10b981;
+}
+
+.filterBadge {
+  background-color: #10b981;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.sectionsBar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.sectionPill {
+  background-color: #21252d;
+  color: #ffffff;
+  border: 1px solid #323842;
+  border-radius: 9999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.sectionPill:hover {
+  border-color: #10b981;
+}
+
+.sectionPillActive {
+  background-color: #10b981;
+  border-color: #10b981;
+}
+
+.statusLoading {
+  color: #10b981;
+}
+
+.statusError {
+  color: #ef4444;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 48px;
+  color: #9ca3af;
+}
+
+.emptyStateBtn {
+  margin-top: 12px;
 }
 
 .catalogGrid {
@@ -123,11 +228,6 @@
 .navLink {
   text-decoration: none;
   color: black;
-}
-
-.btnSecondary {
-  background-color: #e5e7eb;
-  color: #121418;
 }
 
 .btnPrimary {
